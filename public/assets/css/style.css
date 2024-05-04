@@ -1,0 +1,286 @@
+.poppins-thin {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .poppins-extralight {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .poppins-extrabold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .poppins-black {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .poppins-thin-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .poppins-extralight-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  .poppins-light-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .poppins-regular-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .poppins-medium-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .poppins-semibold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .poppins-bold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .poppins-extrabold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  .poppins-black-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+
+
+  .modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .container-fluid {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.371);
+  }
+
+  .hide-field {
+    display: none;
+  }
+
+  .table-responsive {
+    height: 80vh;
+    /* overflow-y: auto; */
+    /* position: relative; */
+    margin-bottom: 10px;
+  }
+  .datatable-card {
+    padding: 20px 20px;
+  }
+  .glass-transparent {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-blue {
+    /* padding: 20px 20px; */
+    background: rgba(0, 128, 255, 0.823); /* Light blue background color with transparency */
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px) brightness(130%) saturate(120%);
+    -webkit-backdrop-filter: blur(5px) brightness(130%) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-round {
+    border-radius: 20px !important;
+  }
+
+  .dt-length {
+    margin-bottom: 5px !important;
+  }
+  .dt-length label {
+    margin-left: 5px;
+  }
+  .dt-buttons {
+    margin-right: 10px !important;
+  }
+
+  .dt-input {
+    background-color: rgba(255, 255, 255, 0.566) !important;
+  }
+  .dt-info {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white !important;
+  }
+
+  .dt-paging-button {
+    color: white !important;
+  }
+  .dt-scroll {
+    margin-top: 15px !important;
+  }
+
+  .dt-paging-button.current {
+    background-color: rgba(255, 255, 255, 0.566) !important;
+  }
+
+  .email-input-bg {
+    background-color: rgba(200, 199, 199, 0.7) !important;
+  }
+  #img-preview {
+    margin-top: 10px;
+    display: none;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+  }
+  .invalid-feedback {
+    color: rgb(255, 59, 37) !important;
+    font-weight: 500;
+  }
+
+  .table-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin: 5px;
+  }
+  .preview-text{
+    margin: 0 !important;
+  }
+
+
+
+  .textShadow {
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .textShadow-dark {
+    text-shadow: 0px 0px 9px rgba(255, 255, 255, 0.686);
+  }
+
+  .glass-btn {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-color: rgba(255, 255, 255, 0.703) !important;
+    color: rgb(83, 102, 249);
+    border: 0 !important;
+  }
+  .open-uploadmodal-btn {
+    background: rgba(255, 255, 255, 0.333) !important;
+  }
+  .login-btn {
+    background: rgba(101, 98, 249, 0.462) !important;
+  }
+  .add-btn {
+    background: rgba(255, 42, 166, 0.462) !important;
+  }
+  /* .login-btn:hover {
+    background: rgba(10, 140, 51, 0.2) !important;
+  }   */
+  .glass-btn:hover {
+    background: rgba(255, 255, 255, 0.129) !important;
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  .signup-link:hover {
+    color: rgba(255, 255, 255, 0.927) !important;
+  }
+  .add-btn {
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+  }
+  .selectize-control {
+    padding: 0px !important;
+  }
+  /* .selectize-input {
+    padding: 2px;
+  } */
+
+  #excel-container {
+    height: fit-content;
+    max-height: 80vh; 
+    overflow-y: auto; 
+  }
+  #invalidMessages p {
+    color: brown;
+    font-weight: 600;
+    font-style: italic;
+  }
+  #uploadModalDialog {
+    max-width: 80vw !important;
+  }
