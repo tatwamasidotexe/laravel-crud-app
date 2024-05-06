@@ -33,3 +33,5 @@ Route::post('/update/{u_id}', [IndexController::class, 'update']);
 Route::get('/getCountries', [IndexController::class, 'getCountries']);
 
 Route::get('/getStates/{country_id}', [IndexController::class, 'getStates']);
+
+Route::delete('/delete/{u_id}', [IndexController::class, 'delete']);

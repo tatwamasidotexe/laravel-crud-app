@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 use Auth;
 
 class IndexController extends Controller
@@ -104,7 +106,47 @@ class IndexController extends Controller
         }
     }
 
-    public function update(Request $request, $u_id){}
+    public function delete(Request $request, $u_id){
+        
+        $user = User::find($u_id);
+        if (!$user) {
+            return response()->json([
+                "status" => "error",
+                "message" => "User not found."
+            ]);
+        }
+
+        $img_url = $user->img_url;
+
+        DB::beginTransaction();
+        try {
+            if ($img_url) {
+                $image_path = public_path('assets/uploads/' . basename($img_url));
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                } else {
+                    return response()->json([
+                        "status" => "error",
+                        "message" => "File could not be found at " . $image_path,
+                    ]);
+                }
+            }
+            $user->delete();
+            DB::commit();
+
+            return response()->json([
+                "status" => "success",
+                "message" => "Data deleted successfully.",
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                "status" => "error",
+                "message" => "Error deleting data: " . $e->getMessage(),
+            ]);
+        }
+    }
 
     public function getCountries(Request $request) {
         try {    

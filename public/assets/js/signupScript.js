@@ -94,8 +94,11 @@ $(document).ready(function() {
     function deleteData(u_id) {
         $.ajax({
             type : "DELETE",
-            url : "../scripts/server.php?u_id=" + u_id + "&action=delete",
+            url : "/delete/" + u_id,
             dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             encode: true,
             success: function(result) {
                 console.log(result.message);
