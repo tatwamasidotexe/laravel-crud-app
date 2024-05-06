@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,10 @@ Route::get('/', function () {
     return view('login');
 });
 
-// Route::resource('user', UserController::class);
+Route::get('signup', function() {
+    return view('signup');
+})->name('signup');
+
+Route::post('/login', [IndexController::class, 'login']);
+
+Route::get('/fetch', [IndexController::class, 'fetch']);

@@ -5,15 +5,18 @@ $(document).ready(function() {
     function sendData(data, event) {
         $.ajax({
             type: "POST",
-            url: "../scripts/loginHandler.php?action=login",
+            url: "/login",
             data: data,
             dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             contentType: false,
             processData: false,
             success: function (response) {
                 if(response.status === "success") {
                     console.log("Status returned success.");
-                    window.location.href = "../dashboard/";
+                    // window.location.href = "../dashboard/";
                 } else {
                     console.log("Status returned error.");
 
@@ -53,9 +56,9 @@ $(document).ready(function() {
         console.log("form validated. proceeding to send data.");
 
         var formData = new FormData(form[0]);
-        for (let [key, value] of formData) {
-            console.log(key + ": " + value);
-        }
+        // for (let [key, value] of formData) {
+        //     console.log(key + ": " + value);
+        // }
 
         sendData(formData, event);
 

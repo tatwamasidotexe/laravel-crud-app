@@ -36,7 +36,8 @@
                         </div>
 
                         <div class="card-body bg-transparent">
-                            <form id="loginForm" action="" method="POST" class="text-light needs-validation" novalidate >
+                            <form id="loginForm" method="POST" class="text-light needs-validation" novalidate >
+                                @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" name="email" class="form-control" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
@@ -49,7 +50,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </form>
-                            <p class="mt-3 text-light" style="text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.21);">New user? <a href="../signup/" class="signup-link text-light">Sign up here.</a></p>
+                            <p class="mt-3 text-light" style="text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.21);">New user? <a href="{{ route('signup') }}" class="signup-link text-light">Sign up here.</a></p>
                         </div>
                     </div>
                 </div>
