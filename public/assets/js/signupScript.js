@@ -66,10 +66,10 @@ $(document).ready(function() {
     var dataTable = fetchData();
 
     function sendData(data, u_id=null) {
-        let action = u_id === null ? "insert" : "update";
+        let action = u_id === null ? "insert" : `update/${u_id}`;
         $.ajax({
             type: "POST",
-            url: "../scripts/server.php?action=" + action + "&u_id=" + u_id,
+            url: `/${action}`,
             data: data,
             dataType: "json",
             contentType: false,
@@ -140,7 +140,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "GET",
-            url: "../scripts/server.php?action=fetchCountries",
+            url: "/getCountries",
             dataType: "json",
             success: function(response) {
                 if(response.status === 'error') {
@@ -180,16 +180,17 @@ $(document).ready(function() {
         let country_id = $(this).find("option").val();
         console.log("onchange country exec, country_id = " + country_id)
 
-        if(country_id !== '' || country_id !== null){
+        if(country_id !== '' || country_id !== null) {
             console.log("country inside = " + country_id);
 
             $.ajax({
                 type: "GET",
-                url: "../scripts/server.php?action=fetchStates&country_id=" + country_id,
+                url: "/getStates/" + country_id,
                 dataType: "json",
                 success: function(response) {
                     if(response.status === 'error') {
                         console.log(response.message);
+                        console.log(response.error);
                     } else {
                         console.log("states fetched successfully.");
 

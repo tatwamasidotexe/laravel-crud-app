@@ -25,3 +25,11 @@ Route::get('signup', function() {
 Route::post('/login', [IndexController::class, 'login']);
 
 Route::get('/fetch', [IndexController::class, 'fetch']);
+
+Route::post('/insert', [IndexController::class, 'insert']);
+
+Route::post('/update/{u_id}', [IndexController::class, 'update']);
+
+Route::get('/getCountries', [IndexController::class, 'getCountries']);
+
+Route::get('/getStates/{country_id}', [IndexController::class, 'getStates']);

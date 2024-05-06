@@ -93,7 +93,7 @@
                             </div>
                             <div class="modal-body">
                                 <form id="inputForm" action="" method="POST" class="needs-validation text-light" novalidate>
-
+                                    @csrf
                                     <!-- NAME -->
                                     <div class="form-group my-2">
                                         <label for="name">Name:</label>
@@ -250,6 +250,7 @@
                                     <button type="button" class="btn btn-primary col-4" style="" id="downloadFormatBtn">Download Format</button>
                                     <!-- <button type="button" class="btn btn-secondary col-4" id="validateBtn">Validate</button> -->
                                     <form id="uploadForm" class="mt-3 col-12" enctype="multipart/form-data">
+                                        @csrf
                                         <label for="excel" class="mt-3">Upload data sheet (.xlsx, .xls):</label>
                                         <input type="file" accept=".xlsx, .xls" class="form-control" name="excel" id="excel" required>
                                         <div class="my-2" id="invalidMessages"></div>
