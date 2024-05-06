@@ -304,8 +304,8 @@ $(document).ready(function() {
         let filename = rowData.img_url.split('/').pop();
 
         $('#imageFilename').text(filename);
-
-        $('#img-preview').attr('src', '../uploads/' + filename);
+        // $('#image').val(rowData.img_url);
+        $('#img-preview').attr('src', rowData.img_url);
         $('#img-preview').show();
         
         // console.log(rowData);

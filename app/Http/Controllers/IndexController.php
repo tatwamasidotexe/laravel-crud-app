@@ -65,13 +65,11 @@ class IndexController extends Controller
             $state_id = $request->input('state_id');
             $hobbies = $request->input('hobbies');
 
-            // Constructing password from username first 3 chars and dob
             $salt = strtolower(substr($name, 0, 3)) . implode("", explode("-", $dob));
 
             // Hashing the password
             $password = Hash::make($salt);
 
-            // Uploading image
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imgurl = rand() . "." . $image->getClientOriginalExtension();
@@ -104,6 +102,51 @@ class IndexController extends Controller
         } else {
             return response()->json(['status' => 'error', 'message' => 'Invalid request.']);
         }
+    }
+
+    public function update(Request $request, $u_id) {
+        $user = User::find($u_id);
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error', 
+                'message' => 'User not found.'
+            ]);
+        }
+
+        $user->username = $request->input('username');
+        $user->dob = $request->input('dob');
+        $user->phone_no = $request->input('phone_no');
+        $user->email = strtolower($request->input('email'));
+        $user->u_address = $request->input('u_address');
+        $user->gender = $request->input('gender');
+        $user->country_id = $request->input('country_id');
+        $user->state_id = $request->input('state_id');
+        $user->hobbies = $request->input('hobbies');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imgurl = rand() . "." . $image->getClientOriginalExtension();
+            $path = public_path('assets/uploads/' . $imgurl);
+            $image->move(public_path('assets/uploads'), $imgurl);
+
+            // Delete old image if exists
+            if ($user->img_url) {
+                $oldImagePath = public_path('assets/uploads/' . $user->img_url);
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
+            }
+
+            $user->img_url = $imgurl;
+        }
+
+        // Save user
+        $user->save();
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'Data updated successfully.'
+        ]);
     }
 
     public function delete(Request $request, $u_id){
