@@ -55,7 +55,7 @@
                     <!-- buttons -->
                     <div class="col-md-6 text-end">
                         <button type="button" class="btn btn-block btn-round glass-btn col-2 open-uploadmodal-btn text-white px-2" style="">Upload Data</button>
-                        <button type="button" class="btn btn-block btn-round glass-btn col-2 login-btn text-white">Log in</button>
+                        <a type="button" class="btn btn-block btn-round glass-btn col-2 login-btn text-white" href="{{ route('login') }}">Log in</a>
                         <button type="button" class="btn btn-block btn-round glass-btn col-2 add-btn text-white" data-bs-toggle="modal" data-action="add" data-bs-target="#inputFormModal">Sign Up</button>
                     </div>
                 </div>

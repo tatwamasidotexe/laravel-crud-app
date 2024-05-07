@@ -245,7 +245,7 @@ class IndexController extends Controller
         if (Auth::attempt($credentials)) {
             return response()->json([
                 'status' => 'success',
-                'message' => 'User login successful',
+                'redirectURL' => route("dashboard"),
             ]);
         }
 

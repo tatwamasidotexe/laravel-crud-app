@@ -7,31 +7,25 @@ $(document).ready(function() {
             type: "POST",
             url: "/login",
             data: data,
-            dataType: "json",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             contentType: false,
             processData: false,
             success: function (response) {
-                if(response.status === "success") {
-                    console.log("Status returned success.");
-                    // window.location.href = "../dashboard/";
-                } else {
+                if(response.status === "error") {
                     console.log("Status returned error.");
 
                     if(response.type === "email" || response.type === "password") {
                         $('#loginForm')[0].reset();
                         alert(response.message);
                     }
-
-                    console.log(response);
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                    return false;
+                } else {
+                    console.log("User logged in, redirecting.");
+                    window.location.href = response.redirectURL;
                 }
                 
-            }, error: function(xhr, status, error) {
+            }, error: function(xhr, error) {
                 console.log("Server error = " + error);
                 console.log(xhr.responseText);
             }

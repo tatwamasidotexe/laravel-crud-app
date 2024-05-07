@@ -1,0 +1,100 @@
+body {
+    /* background-image: url("../img/bg-trippy-dark.jpg"); */
+    background-size: cover;
+    background-position: center;
+}
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* overflow-y: scroll; */
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.397);
+    /* padding: 0 !important; */
+}
+.glass-nav {
+    background: rgba(255, 255, 255, 0.078) !important;
+    /* border-radius: 16px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.156);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
+}
+.landing-section {
+    height: 100vh;
+}
+.card-section {
+    height: 100vh;
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.258) !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.156);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* .glass-card :hover  {
+    background: rgba(255, 255, 255, 0.208) !important;
+} */
+.card-detail-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+/* .card {
+    display: flex;
+    flex-direction: column;
+    height: 200px; 
+  }
+  
+  .card-body {
+    flex: 1; 
+    overflow-y: auto; 
+  } */
+
+.viewMoreButton, .exploreButton {
+    margin-right: 2px !important;
+    margin-left: 2px !important;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-brand span {
+    margin-left: 10px;
+    font-size: medium;
+}
+
+.glass-modal {
+    /* background: url('../img/bg-trippy-dark.jpg') !important; */
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.156);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000c3 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7d7d7d !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #646464 !important;
+}
+.glass-btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-color: rgba(255, 255, 255, 0.703) !important;
+    color: rgb(83, 102, 249);
+    border: 0 !important;
+  }

@@ -324,9 +324,10 @@ $(document).ready(function() {
         // stateSelectize[0].selectize.setValue(rowData.state);
     });
     
-    $('.login-btn').click(function() {
-        window.location.href = '../login/';
-    });
+    // $('.login-btn').click(function() {
+    //     let url = "{{ route('login') }}";
+    //     window.location.href = url;
+    // });
     $(document).on('click', '#passwordModalBtn', function() {
         window.location.href = '../dashboard/';
     });
