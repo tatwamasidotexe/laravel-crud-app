@@ -249,6 +249,7 @@ $(document).ready(function() {
     });
 
     $('.add-btn').click(function() {
+
         $('#inputForm').attr('data-action', 'add');
         
         stateSelectize[0].selectize.clearOptions();
@@ -257,7 +258,13 @@ $(document).ready(function() {
         countrySelectize[0].selectize.setValue('');
 
         $('#inputForm')[0].reset();
-        
+        $("#inputForm").removeClass("was-validated");
+        if ($('.gender-feedback').hasClass('d-block')){
+            $('.gender-feedback').addClass('d-none').removeClass('d-block');
+        }
+        if ($('.hobbies-feedback').hasClass('d-block')){
+            $('.hobbies-feedback').addClass('d-none').removeClass('d-block');
+        }
         $('#imageFilename').hide();
         $('#img-preview').hide();
         $('#inputFormModal').modal('show');
@@ -354,37 +361,60 @@ $(document).ready(function() {
 
         var form = $(this);
 
+        if($('input[name="gender"]:checked').length > 0) {
+            console.log("Gender selected.");
+            form.find('.gender-feedback').addClass('d-none').removeClass('d-block');
+        } else {
+            $('.gender-feedback').addClass('d-block').removeClass('d-none');
+            console.log("no gender selected.");
+        }
+
+        if (!$('#country').val()) {
+            $('#country').addClass('is-invalid');
+        } else if($('#country').val() && !$('#state').val()){
+            $('#country').removeClass('is-invalid');
+            $('#state').addClass('is-invalid');
+        } else {
+            $('#state').removeClass('is-invalid');
+            // $('#country').removeClass('is-invalid');
+        }
+
         // validating hobbies input
-        var hobbiesChecked = form.find('input[type="checkbox"]:checked').length;
+        let hobbiesChecked = form.find('input[type="checkbox"]:checked').length;
 
         if(hobbiesChecked === 0){
-            form.find('.invalid-feedback .hobbies-feedback').show();
+            form.find('.hobbies-feedback').addClass('d-block').removeClass('d-none');
             // event.preventDefault();
             event.stopPropagation();
             console.log("no hobbies selected.");
 
         } else {
-            form.find('.invalid-feedback .hobbies-feedback').hide();
+            form.find('.hobbies-feedback').addClass('d-none').removeClass('d-block');
             console.log("at least one hobby selected.");
         }
         
         // validating image file upload size
         var imageFile = form.find('#image')[0].files[0];
         if (imageFile && imageFile.size < 120 * 1024) {
-            form.find('.invalid-feedback').text('File size must be less than 120KB.');
+            form.find('.file-size-feedback').addClass('d-block').removeClass('d-none');
+            form.find('.file-size-feedback').text('File size must be less than 120KB.');
             event.stopPropagation();
             console.log("file size exceeds 120KB.");
             return;
         } else {
-            form.find('.invalid-feedback').text('');
+            // form.find('.file-size-feedback').addClass('d-none').removeClass('d-block');
             // console.log("file size is within limit.");
         }
 
         if(!form[0].checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
+            console.log("form fields are invalid.");
+            // form.find('.invalid-feedback').addClass('d-block').removeClass('d-none');
             form.addClass('was-validated');
             return;
+        } else {
+            form.find('.invalid-feedback').addClass('d-none').removeClass('d-block');
         }
 
         console.log("form validated. proceeding to send data.");
@@ -398,6 +428,7 @@ $(document).ready(function() {
                 hobbyList.push(value);
             }
         }
+
         formData.delete("hobby");
         formData.append("hobbies", hobbyList);
 
@@ -407,16 +438,14 @@ $(document).ready(function() {
         formData.delete("phone");
         formData.append("phone_no", phone_no);
 
-        console.log("printing formdata:")
+        console.log("printing formdata:");
         for (let [key, value] of formData) {
             console.log(key + ": " + value);
         }
 
         var action = $(this).attr('data-action');
         if (action === 'add') {
-
             sendData(formData);
-
         } else if (action === 'edit') {
 
             var u_id = $(this).attr('data-u-id');

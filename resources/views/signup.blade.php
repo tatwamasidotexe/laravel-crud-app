@@ -54,7 +54,7 @@
                     </div>
                     <!-- buttons -->
                     <div class="col-md-6 text-end">
-                        <button type="button" class="btn btn-block btn-round glass-btn col-2 open-uploadmodal-btn text-white px-2" style="">Upload Data</button>
+                        <button type="button" class="btn btn-block btn-round glass-btn col-2 open-uploadmodal-btn text-white px-2" style="">Upload</button>
                         <a type="button" class="btn btn-block btn-round glass-btn col-2 login-btn text-white" href="{{ route('login') }}">Log in</a>
                         <button type="button" class="btn btn-block btn-round glass-btn col-2 add-btn text-white" data-bs-toggle="modal" data-action="add" data-bs-target="#inputFormModal">Sign Up</button>
                     </div>
@@ -156,7 +156,7 @@
                                             <input class="form-check-input" type="radio" name="gender" id="other" value="other">
                                             <label class="form-check-label" for="other">Other</label>
                                         </div>
-                                        <div class="invalid-feedback">Please select a gender.</div>
+                                        <div class="invalid-feedback gender-feedback">Please select a gender.</div>
                                     </div>
                                     
                                     <!-- COUNTRY -->
@@ -207,7 +207,7 @@
                                         <label for="image">Upload image (.jpg, .jpeg, .png):</label>
                                         <p class="mb-0 text-light" id="imageFilename"></p>
                                         <input type="file" accept=".jpg, .jpeg, .png" class="form-control" name="image" id="image" required> 
-                                        <div class="invalid-feedback">Please upload an image.</div>
+                                        <div class="invalid-feedback file-size-feedback">Please upload an image.</div>
                                         <p class="mb-0 pb-0 text-light preview-text">Preview:</p>
                                         <img src="" alt="Preview Uploaded Image" id="img-preview" class="mt-0 pt-0"/>
                                     </div>
