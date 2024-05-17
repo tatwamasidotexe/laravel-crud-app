@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use \Mpdf\Mpdf as PDF; 
 
 use Auth;
 
@@ -253,5 +254,42 @@ class IndexController extends Controller
             'status' => 'error',
             'message' => 'Invalid email or password.',
         ], 401);
+    }
+
+    public function download(Request $request, $u_id) {
+        
+        $documentFileName = "DegreeCert". $u_id .".pdf";
+ 
+        // Create the mPDF document
+        $document = new PDF( [
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_header' => '3',
+            'margin_top' => '20',
+            'margin_bottom' => '20',
+            'margin_footer' => '2',
+        ]);     
+ 
+        // Set some header informations for output
+        $header = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$documentFileName.'"'
+        ];
+ 
+        // Write some simple Content
+        $document->WriteHTML('<h1 style="color:blue">DEGREE CERTIFICATE</h1>');
+        $document->WriteHTML('<p>User '. $u_id.'</p>');
+
+        // Storage::disk('public')->put($documentFileName, $document->Output($documentFileName, "S"));
+        $filePath = 'public/' . $documentFileName;
+        Storage::put($filePath, $document->Output($documentFileName, 'S'));
+
+        $fileUrl = Storage::url($filePath);
+
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'File generated successfully',
+            'file_url' => $fileUrl
+        ]);
     }
 }

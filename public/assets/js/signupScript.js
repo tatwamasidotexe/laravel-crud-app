@@ -50,7 +50,7 @@ $(document).ready(function() {
                         {data: 'state_name'},
                         {data : 'country_name'},
                         {data : null, render: function(data, type, row) {
-                            return '<button type="button" class="btn btn-primary btn-sm edit-btn" data-bs-toggle="modal" data-action="edit" data-bs-target="#inputFormModal">Edit</button> <button type="button" class="btn btn-danger btn-sm del-btn" data-action="del" onclick="">Delete</button>'
+                            return `<button type="button" class="btn btn-success btn-sm cert-btn text-white"><img src="${window.location.origin}/assets/images/downloadBtn.png"></button> <button type="button" class="btn btn-primary btn-sm edit-btn" data-bs-toggle="modal" data-action="edit" data-bs-target="#inputFormModal">Edit</button> <button type="button" class="btn btn-danger btn-sm del-btn" data-action="del" onclick="">Delete</button>`
                         }}
                     ],
                 });
@@ -110,6 +110,32 @@ $(document).ready(function() {
                 console.log(error);
             }
         })
+    }
+
+    function downloadCert(u_id) {
+        $.ajax({
+            type : "GET",
+            url : "/download/" + u_id,
+            dataType: "json",
+            encode: true,
+            success: function(response) {
+                if (response.status === 'success') {
+                    let fileUrl = response.file_url;
+                    console.log(fileUrl)
+                    let link = document.createElement('a');
+                    link.href = fileUrl;
+                    link.download = 'DegreeCertificate.pdf';
+                    link.click();
+                } else {
+                    console.error("Failed to generate file:", response.message);
+                }
+            },
+            error: function(xhr, status, error) {           
+                console.log(status);
+                console.log(xhr.responseText);
+                console.log(error);
+            }
+        });
     }
 
     // ----------------------------------- COUNTRY/STATE SELECTIZE ----------------------------------------
@@ -268,6 +294,11 @@ $(document).ready(function() {
         $('#imageFilename').hide();
         $('#img-preview').hide();
         $('#inputFormModal').modal('show');
+    });
+
+    $(document).on('click', '.cert-btn', function() {
+        var u_id = dataTable.row($(this).parents('tr')).data().u_id;
+        downloadCert(u_id);
     });
 
     $(document).on('click', '.del-btn', function() {
