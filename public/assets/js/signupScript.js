@@ -114,23 +114,21 @@ $(document).ready(function() {
 
     function downloadCert(u_id) {
         $.ajax({
-            type : "GET",
-            url : "/download/" + u_id,
-            dataType: "json",
-            encode: true,
-            success: function(response) {
-                if (response.status === 'success') {
-                    let fileUrl = response.file_url;
-                    console.log(fileUrl)
-                    let link = document.createElement('a');
-                    link.href = fileUrl;
-                    link.download = 'DegreeCertificate.pdf';
-                    link.click();
-                } else {
-                    console.error("Failed to generate file:", response.message);
-                }
+            type: "GET",
+            url: "/download/" + u_id,
+            xhrFields: {
+                responseType: 'blob'
             },
-            error: function(xhr, status, error) {           
+            success: function(response) {
+                let blob = new Blob([response], { type: 'application/pdf' });
+                let link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'DegreeCert' + u_id + '.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+            error: function(xhr, status, error) {
                 console.log(status);
                 console.log(xhr.responseText);
                 console.log(error);

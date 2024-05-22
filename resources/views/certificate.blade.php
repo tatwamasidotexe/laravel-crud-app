@@ -71,7 +71,7 @@
         <table style="width: 100%; border-collapse: collapse; border: 10px solid #1d3d70;">
             <tr class="border-bottom">
                 <td align ="right">
-                    <img width='150px' height='150px' src="{{ asset('assets/images/XIM_University_Logo.png') }}" alt="ximLogo">
+                    <img width='150px' height='150px' src="{{asset('assets/images/XIM_University_Logo.png') }}" alt="ximLogo">
                 </td>
                 <td style="text-align: center;">
                     <h1>XIM UNIVERSITY</h1>
@@ -117,10 +117,3 @@
         </table>
     </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-
-
-
-<body>
-    

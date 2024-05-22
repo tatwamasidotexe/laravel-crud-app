@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 use \Mpdf\Mpdf as PDF; 
 
 use Auth;
@@ -256,40 +257,238 @@ class IndexController extends Controller
         ], 401);
     }
 
-    public function download(Request $request, $u_id) {
+    // public function download(Request $request, $u_id) {
         
-        $documentFileName = "DegreeCert". $u_id .".pdf";
- 
-        // Create the mPDF document
-        $document = new PDF( [
-            'mode' => 'utf-8',
-            'format' => 'A4',
-            'margin_header' => '3',
-            'margin_top' => '20',
-            'margin_bottom' => '20',
-            'margin_footer' => '2',
-        ]);     
- 
-        // Set some header informations for output
-        $header = [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.$documentFileName.'"'
-        ];
- 
-        // Write some simple Content
-        $document->WriteHTML('<h1 style="color:blue">DEGREE CERTIFICATE</h1>');
-        $document->WriteHTML('<p>User '. $u_id.'</p>');
+    //     $username = (User::find($u_id))->username;
 
-        // Storage::disk('public')->put($documentFileName, $document->Output($documentFileName, "S"));
-        $filePath = 'public/' . $documentFileName;
-        Storage::put($filePath, $document->Output($documentFileName, 'S'));
+    //     if (!$username) {
+    //         return response()->json([
+    //             'status' => 'error', 
+    //             'message' => 'User not found.'
+    //         ]);
+    //     }
 
-        $fileUrl = Storage::url($filePath);
+    //     $documentFileName = "DegreeCert" . $u_id . ".pdf";
+    
+    //     // Render the Blade view to HTML
+    //     $htmlContent = view('certificate', compact('u_id', 'username'))->render();
+    
+    //     // Create the mPDF document
+    //     $document = new \Mpdf\Mpdf([
+    //         'mode' => 'utf-8',
+    //         'format' => 'A4-L',
+    //         'margin_header' => '3',
+    //         'margin_top' => '20',
+    //         'margin_bottom' => '20',
+    //         'margin_footer' => '2',
+    //     ]);
+    
+    //     // Write the HTML content to the PDF
+    //     $document->WriteHTML($htmlContent);
+    
+    //     // Save the PDF to the storage
+    //     $filePath = 'public/' . $documentFileName;
+    //     Storage::put($filePath, $document->Output('', 'I'));
+    
+    //     // Generate the URL to the file
+    //     $fileUrl = Storage::url($filePath);
 
-        return response()->json([
-            'status' => 'success', 
-            'message' => 'File generated successfully',
-            'file_url' => $fileUrl
-        ]);
+        // $document->OutputHttpDownload($documentFileName);
+    
+        // Send the PDF to the browser for download
+        // return response($document->Output($documentFileName, 'D'))->header('Content-Type', 'application/pdf');
+    
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'File generated successfully',
+    //         'file_url' => $fileUrl
+    //     ]);
+    // }
+
+    public function download(Request $request, $u_id) {
+        try {    
+            $user = User::find($u_id);
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User not found.'
+                ]);
+            }
+    
+            $username = $user->username;
+    
+            // Use public_path() to get the absolute path for images
+            $ximLogo = public_path('assets/images/XIM_University_Logo.png');
+            $deanSign = public_path('assets/images/deanSign.png');
+            $registrarSign = public_path('assets/images/registrarSign.png');
+            $vcSign = public_path('assets/images/VCSign.png');
+
+            $document = new \Mpdf\Mpdf([
+                'mode' => 'utf-8',
+                'format' => 'A4-L',
+            ]);
+            // $abfont = $document->SetFont('aboriginalsans');
+            $dejavufont = $document->SetFont('dejavusanscondensed');
+    
+            $htmlContent = '
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body {
+                            width: 100%;
+                            height: 100%;
+                            margin: 0;
+                            padding: 10px;
+                            font-family: Arial, sans-serif;
+                            box-sizing: border-box;
+                            overflow-x: hidden;
+                            background: #f0f0f0;
+                        }
+                        .my-0 {
+                            margin-top: 0;
+                            margin-bottom: 0;
+                        }
+                        table {
+                            background: rgb(241,255,231);
+                            background: radial-gradient(circle, rgba(241,255,231,1) 0%, rgba(255,244,246,1) 35%, rgba(233,238,250,1) 100%);
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            border: 20px solid #1d3d70;
+                        }
+                        tr {
+                            box-sizing: border-box;
+                        }
+                        .border-bottom td {
+                            border-bottom: 1px solid black;
+                        }
+                        .header-row {
+                            background: rgb(217,255,190);
+                            background: linear-gradient(90deg, rgba(217,255,190,0.7904411764705882) 0%, rgba(255,240,242,1) 0%, rgba(223,231,250,1) 100%);
+                        }
+                        .logoCol {
+                            text-align: center;
+                            width: 5%;
+                            padding-top: 40px;
+                            padding-bottom: 40px;
+                        } 
+                        .headerTextCol {
+                            text-align: center;
+                            width: 90%;
+                            font-family: "Times New Roman", Times, serif;
+                            padding-top: 40px;
+                            padding-bottom: 40px;
+                        }
+                        .degCertNumCol {
+                            font-size: 20px; 
+                            vertical-align: bottom;
+                            width: 5%;
+                            padding-left: 20px;
+                            padding-bottom: 20px;
+                        }
+                        .certBody td {
+                            padding-top: 90px;
+                            padding-bottom: 50px;
+                            width: 100%; 
+                            text-align: center;
+                            font-family: Georgia, serif;
+                        }
+
+                        .certBody td span {
+                            font-family: "Brush Script MT", cursive;
+                        }
+
+                        .signatures td {
+                            padding-top: 40px;
+                            padding-bottom: 60px;
+                            font-family: "Times New Roman", Times, serif;
+                        }
+                        .signatures img {
+                            width: 300px;
+                            height: auto;
+                        }
+                        .signatures h4 {
+                            margin-top: 0;
+                        }
+                        .signatures td {
+                            font-size: 30px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <tr class="border-bottom header-row">
+                            <td align="center" class="logoCol">
+                                <img width="230px" height="230px" src="' . $ximLogo . '" alt="ximLogo">
+                            </td>
+                            <td class="headerTextCol">
+                                <h1 style="font-size: 50px;">XIM UNIVERSITY</h1>
+                                <p style="font-size: 30px;">(Established under the Xavier University, Odisha (Amendment) Act 2021)<br><br></p>
+                                <h3 style="margin-top: 40px; font-size: 30px;">School of Computer Science and Engineering<br>Bhubaneswar</h3>
+                            </td>
+                            <td class="degCertNumCol">
+                                <p class="my-0">XIM20240427UCSE200'.$u_id.'UB</p>
+                            </td>  
+                        </tr>
+                        <tr class="certBody" style="width: 100%;">
+                            <td colspan="3">
+                                <p style="font-size: 30px;"><i>The Governing Board hereby certifies that<br><br></i></p>
+                                <h1 style="font-size: 60px; margin-top: 20px !important;"><i>' . $username . '<br></i></h1>
+                                <p style="font-size: 30px;"><i>
+                                <br>Class 2020-2024<br><br>
+                                    on the successful completion of all the requirements and on the<br>
+                                    recommendation of the faculty is awarded the Degree of<br><br>
+                                </i></p>
+                                <h1 style="font-size: 60px;"><i>B.Tech in Computer Science & Engineering (Hons.)</i></h1>
+                                <p style="font-size: 30px;"><i><br>
+                                    with all its rights and privileges.
+                                </i></p>
+                                <p style="font-size: 30px;"><i>
+                                    Given in Bhubaneswar, Odisha, India on 27th April 2024.
+                                </i></p>
+                            </td>
+                        </tr>
+                        <tr class="signatures">
+                            <td style="text-align: center;">
+                                <img src="' . $deanSign . '" alt="Dean Sign">
+                                <h4>Dean (Academics)</h4>
+                            </td>
+                            <td style="text-align: center;">    
+                                <img src="'. $registrarSign .'" alt="Registrar Sign">
+                                <h4>Registrar</h4>
+                            </td>
+                            <td style="text-align: center;">
+                                <img src="' . $vcSign . '" alt="VC Sign">
+                                <h4>Vice-Chancellor</h4>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+            </html>
+            ';
+    
+            // Set the watermark image
+            $document->SetWatermarkImage($ximLogo, 0.17, '', [101, 70]);
+            $document->showWatermarkImage = true;
+    
+            // Write the HTML content to the PDF
+            $document->WriteHTML($htmlContent);
+    
+            // Set the PDF file name
+            $documentFileName = "DegreeCert" . $u_id . ".pdf";
+    
+            // Return the PDF as a response
+            return response($document->Output($documentFileName, 'S'), 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="'.$documentFileName.'"');
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
+    
+
 }

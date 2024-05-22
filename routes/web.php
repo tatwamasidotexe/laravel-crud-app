@@ -46,3 +46,5 @@ Route::get('/getStates/{country_id}', [IndexController::class, 'getStates']);
 Route::delete('/delete/{u_id}', [IndexController::class, 'delete']);
 
 Route::get('/download/{u_id}', [IndexController::class, 'download']);
+
+Route::view('/certificate', 'certificate', ['u_id' => 67]);
