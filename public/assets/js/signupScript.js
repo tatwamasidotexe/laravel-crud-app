@@ -112,7 +112,7 @@ $(document).ready(function() {
         })
     }
 
-    function downloadCert(u_id) {
+    function previewCert(u_id) {
         $.ajax({
             type: "GET",
             url: "/download/" + u_id,
@@ -120,13 +120,23 @@ $(document).ready(function() {
                 responseType: 'blob'
             },
             success: function(response) {
+                // let blob = new Blob([response], { type: 'application/pdf' });
+                // let link = document.createElement('a');
+                // link.href = window.URL.createObjectURL(blob);
+                // link.download = 'DegreeCert' + u_id + '.pdf';
+                // document.body.appendChild(link);
+                // link.click();
+                // document.body.removeChild(link);
+
                 let blob = new Blob([response], { type: 'application/pdf' });
-                let link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'DegreeCert' + u_id + '.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                let url = window.URL.createObjectURL(blob);
+                
+                // Create iframe and set its attributes
+                $('iframe').attr('src', url);
+
+                // Clear any existing content in the modal body and append the iframe
+                // Show the modal
+                $('#downloadCertModal').modal('show');
             },
             error: function(xhr, status, error) {
                 console.log(status);
@@ -296,7 +306,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.cert-btn', function() {
         var u_id = dataTable.row($(this).parents('tr')).data().u_id;
-        downloadCert(u_id);
+        previewCert(u_id);
     });
 
     $(document).on('click', '.del-btn', function() {

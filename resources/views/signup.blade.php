@@ -219,6 +219,21 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="downloadCertModal" tabindex="-1" aria-labelledby="downloadCertModalLabel" aria-hidden="true">
+                    <div class="modal-dialog bg-transparent glass-blue mx-auto" id="downloadCertModalDialog">
+                        <div class="modal-content bg-transparent">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-light" id="downloadCertModalLabel">Download degree certificate</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="" style="width: 100%; height: 500px;" frameborder="0">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Password Modal -->
                 <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
