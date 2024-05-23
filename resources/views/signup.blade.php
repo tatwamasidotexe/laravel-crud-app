@@ -227,6 +227,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <a type="button" class="downloadCertBtn btn btn-block mb-2 btn-primary text-white px-2" style="">Download</a>
+                                <p class="mb-0 mb-1 text-light">Preview:</p>
                                 <iframe src="" style="width: 100%; height: 500px;" frameborder="0">
                                 </iframe>
                             </div>

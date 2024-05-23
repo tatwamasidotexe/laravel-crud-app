@@ -127,6 +127,7 @@ $(document).ready(function() {
                 // document.body.appendChild(link);
                 // link.click();
                 // document.body.removeChild(link);
+                
 
                 let blob = new Blob([response], { type: 'application/pdf' });
                 let url = window.URL.createObjectURL(blob);
@@ -134,8 +135,10 @@ $(document).ready(function() {
                 // Create iframe and set its attributes
                 $('iframe').attr('src', url);
 
-                // Clear any existing content in the modal body and append the iframe
-                // Show the modal
+                let downloadBtn = $('#downloadCertModal .downloadCertBtn');
+                downloadBtn.attr('href', url);
+                downloadBtn.attr('download', 'GraduationCertificate' + u_id + '.pdf');
+
                 $('#downloadCertModal').modal('show');
             },
             error: function(xhr, status, error) {
