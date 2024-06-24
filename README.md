@@ -6,8 +6,11 @@ login:
 signup:
 ![image](https://github.com/tatwamasidotexe/laravel-crud-app/assets/72276849/1f37106d-96fe-4e7e-9d45-7aeb6cc80c1f)
 
-user datatable for admin
+user datatable for admin, with buttons to edit and delete each record:
 ![image](https://github.com/tatwamasidotexe/laravel-crud-app/assets/72276849/d1c32f8d-e21b-4e0c-95df-1275d6cc9be3)
+
+admin can generate degree certificate for each user by clicking the download button:
+![image](https://github.com/tatwamasidotexe/laravel-crud-app/assets/72276849/0b575fcd-4aba-456e-b014-701ee4c088fb)
 
 bulk data upload according to given excel format using mpdf, with proper validation:
 ![image](https://github.com/tatwamasidotexe/laravel-crud-app/assets/72276849/dbb456db-144a-4ae7-9ddf-2fb0b4f4cc38)
